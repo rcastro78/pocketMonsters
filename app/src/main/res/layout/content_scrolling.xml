@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".fragment.WildFragment"
+    tools:showIn="@layout/fragment_wild">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_margin="6dp"
+            android:minHeight="180dp"
+            android:weightSum="100"
+            android:orientation="vertical"
+            android:id="@+id/llBasic"
+
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                >
+
+                <TextView
+                    android:id="@+id/lblBasic"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:gravity="center_vertical"
+                    android:text="Basic Info"
+                    android:textColor="@color/black"
+                    android:textSize="24dp"></TextView>
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="132dp"
+                >
+
+                <TextView
+                    android:id="@+id/lblLevel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Level: 3"
+                    android:textColor="@color/black"
+
+                    android:textSize="20dp"></TextView>
+
+
+                <TextView
+                    android:id="@+id/lblType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/lblLevel"
+                    android:layout_marginTop="6dp"
+                    android:text="Types:"
+                    android:textColor="@color/black"
+                    android:textSize="20dp"></TextView>
+
+
+                <TextView
+                    android:id="@+id/lblCaptured"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/lblType"
+                    android:layout_marginTop="6dp"
+                    android:text="Captured:"
+                    android:textColor="@color/black"
+                    android:textSize="20dp"></TextView>
+
+            </RelativeLayout>
+
+
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_margin="6dp"
+            android:minHeight="180dp"
+            android:weightSum="100"
+            android:orientation="vertical"
+            android:id="@+id/llMoves"
+            android:layout_below="@id/llBasic"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                >
+
+                <TextView
+                    android:id="@+id/lblMoves"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:gravity="center_vertical"
+                    android:text="Moves"
+                    android:textColor="@color/black"
+                    android:textSize="24dp"></TextView>
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="132dp"
+                >
+
+                <TextView
+                    android:id="@+id/lblMove"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+
+                    android:textSize="20dp"></TextView>
+
+
+            </RelativeLayout>
+
+
+
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_margin="6dp"
+            android:minHeight="180dp"
+            android:weightSum="100"
+            android:orientation="vertical"
+            android:id="@+id/llMap"
+            android:layout_below="@id/llMoves"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                >
+
+                <TextView
+                    android:id="@+id/lblFound"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:gravity="center_vertical"
+                    android:text="Found in"
+                    android:textColor="@color/black"
+                    android:textSize="24dp"></TextView>
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="132dp"
+                >
+
+                <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:tools="http://schemas.android.com/tools"
+                    android:id="@+id/map"
+                    android:name="com.google.android.gms.maps.SupportMapFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                     />
+
+            </RelativeLayout>
+
+
+
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</androidx.core.widget.NestedScrollView>

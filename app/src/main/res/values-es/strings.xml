@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Pocket Monsters</string>
+    <string name="SAMARITAN_URL">https://us-central1-samaritan-android-assignment.cloudfunctions.net/</string>
+    <string name="explore">Explora</string>
+    <string name="community">Comunidad</string>
+    <string name="my_team">Mi Equipo</string>
+    <string name="captured">Capturados</string>
+    <string name="name">Nombre</string>
+    <string name="type">Tipo</string>
+    <string name="date_captured">Fecha de captura:</string>
+</resources>

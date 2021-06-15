@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="100">
+
+    <LinearLayout
+        android:id="@+id/llHeader"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="75"
+        android:background="#C0C0C0"
+        android:orientation="vertical"
+        android:weightSum="100">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="25"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/imgFront"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_centerInParent="true"></ImageView>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/imgRear"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_centerInParent="true"></ImageView>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="75">
+
+            <TextView
+                android:id="@+id/lblPokeName"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8dp"
+                android:gravity="center_vertical"
+                android:text="Pokemon"
+                android:textColor="@color/white"
+                android:textSize="20dp"></TextView>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="25">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_margin="6dp"
+            android:minHeight="180dp"
+            android:weightSum="100"
+            android:orientation="vertical"
+            android:id="@+id/llTrainer"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                >
+
+                <TextView
+                    android:id="@+id/lblCapturedBy"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:gravity="center_vertical"
+                    android:text="Captured by"
+                    android:textColor="@color/black"
+                    android:textSize="24dp"></TextView>
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="132dp"
+                >
+
+                    <ImageView
+                        android:layout_width="90dp"
+                        android:layout_height="120dp"
+                        android:layout_centerInParent="true"
+                        android:id="@+id/imgCapturedBy"></ImageView>
+
+            </RelativeLayout>
+
+
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_margin="6dp"
+            android:minHeight="180dp"
+            android:weightSum="100"
+            android:orientation="vertical"
+            android:id="@+id/llBasic"
+            android:layout_below="@id/llTrainer"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                >
+
+                <TextView
+                    android:id="@+id/lblBasic"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:gravity="center_vertical"
+                    android:text="Basic Info"
+                    android:textColor="@color/black"
+                    android:textSize="24dp"></TextView>
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="132dp"
+                >
+
+                <TextView
+                    android:id="@+id/lblLevel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Level: 3"
+                    android:textColor="@color/black"
+
+                    android:textSize="20dp"></TextView>
+
+
+                <TextView
+                    android:id="@+id/lblType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/lblLevel"
+                    android:layout_marginTop="6dp"
+                    android:text="Types:"
+                    android:textColor="@color/black"
+                    android:textSize="20dp"></TextView>
+
+
+                <TextView
+                    android:id="@+id/lblCaptured"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/lblType"
+                    android:layout_marginTop="6dp"
+                    android:text="Captured:"
+                    android:textColor="@color/black"
+                    android:textSize="20dp"></TextView>
+
+            </RelativeLayout>
+
+
+
+
+
+        </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_margin="6dp"
+                android:minHeight="180dp"
+                android:weightSum="100"
+                android:orientation="vertical"
+                android:id="@+id/llMoves"
+                android:layout_below="@id/llBasic"
+                android:layout_height="match_parent">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    >
+
+                    <TextView
+                        android:id="@+id/lblMoves"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerVertical="true"
+                        android:gravity="center_vertical"
+                        android:text="Moves"
+                        android:textColor="@color/black"
+                        android:textSize="24dp"></TextView>
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="132dp"
+                    >
+
+                    <TextView
+                        android:id="@+id/lblMove"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+
+                        android:textSize="20dp"></TextView>
+
+
+                </RelativeLayout>
+
+
+
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+    </ScrollView>
+
+
+
+
+
+</LinearLayout>
