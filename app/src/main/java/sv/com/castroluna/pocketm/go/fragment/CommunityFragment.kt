@@ -4,15 +4,16 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Typeface
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.community_fragment.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import sv.com.castroluna.pocketm.go.DetailActivity
 import sv.com.castroluna.pocketm.go.R
 import sv.com.castroluna.pocketm.go.adapter.FoesRecyclerViewAdapter
@@ -22,12 +23,9 @@ import sv.com.castroluna.pocketm.go.model.Friend
 import sv.com.castroluna.pocketm.go.networking.APIUtils
 import sv.com.castroluna.pocketm.go.networking.IPokeService
 import sv.com.castroluna.pocketm.go.service.AppDatabase
-import sv.com.castroluna.pocketm.go.service.DBService
 import sv.com.castroluna.pocketm.go.util.OnItemClickListener
 import sv.com.castroluna.pocketm.go.util.addOnItemClickListener
 import sv.com.castroluna.pocketm.go.viewmodel.CommunityViewModel
-import java.text.SimpleDateFormat
-import java.util.*
 import kotlin.collections.ArrayList
 
 
@@ -62,10 +60,14 @@ class CommunityFragment : Fragment() {
         db = AppDatabase.getInstance(requireActivity().application)
         iPokeService = APIUtils.getPokeService()!!
         viewModel = ViewModelProvider(this).get(CommunityViewModel::class.java)
-        makeApiCall(token!!)
+
         val font1 = Typeface.createFromAsset(activity?.assets, "fonts/Lato-Bold.ttf")
         lblFoes.typeface = font1
         lblFriends.typeface = font1
+
+        CoroutineScope(Dispatchers.Main).launch{
+            makeApiCall(token!!)
+        }
 
         rvFriends.addOnItemClickListener(object: OnItemClickListener {
             override fun onItemClicked(position: Int, view: View) {

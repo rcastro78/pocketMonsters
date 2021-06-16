@@ -3,6 +3,7 @@ package sv.com.castroluna.pocketm.go.model
 open class Pokemon {
     var name: String? = null
     var url: String? = null
+    var id:String? = null
 }
 
 class PokemonRoot {

@@ -1,8 +1,8 @@
 package sv.com.castroluna.pocketm.go
 
-import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,17 +12,19 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import sv.com.castroluna.pocketm.go.fragment.CapturedFragment
 import sv.com.castroluna.pocketm.go.fragment.CommunityFragment
 import sv.com.castroluna.pocketm.go.fragment.ExploreFragment
 import sv.com.castroluna.pocketm.go.fragment.MyTeamFragment
+import sv.com.castroluna.pocketm.go.model.UserToken
 import sv.com.castroluna.pocketm.go.networking.APISamaritanUtils
-import sv.com.castroluna.pocketm.go.networking.APIUtils
-import sv.com.castroluna.pocketm.go.networking.IPokeService
 import sv.com.castroluna.pocketm.go.networking.ISamaritanService
 import sv.com.castroluna.pocketm.go.service.AppDatabase
-import sv.com.castroluna.pocketm.go.service.DBService
 import sv.com.castroluna.pocketm.go.util.TabAdapter
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -56,13 +58,31 @@ class MainActivity : AppCompatActivity() {
 
         mViewPager!!.adapter = adapter
         tabLayout!!.setupWithViewPager(mViewPager)
-
-        val intent = Intent(this, DBService::class.java)
-        startService(intent)
+        val timeMillis = System.currentTimeMillis()
+        val expiry = sharedPreferences!!.getString("EXPIRY","0")?.toLong()
+        if(timeMillis>expiry!!)
+            getToken()
 
     }
 
+    fun getToken(){
+        val call = iSamaritanService.getToken()
+        call.enqueue(object : Callback<UserToken> {
+            override fun onResponse(call: Call<UserToken>?, response: Response<UserToken>?) {
+                if (response != null) {
+                    val editor = sharedPreferences!!.edit()
+                    editor.putString("TOKEN",response.body().token)
+                    editor.putString("EXPIRY",response.body().expiresAt)
+                    editor.apply()
+                    Log.d("SERVICE_PK",response.body().token);
+                }
+            }
 
+            override fun onFailure(call: Call<UserToken>?, t: Throwable?) {
+
+            }
+        })
+    }
 
 
 

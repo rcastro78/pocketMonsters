@@ -73,6 +73,9 @@ class CapturedFragment : Fragment() {
         val token: String? = sharedPreferences?.getString("TOKEN", "")
 
         var data: List<CapturedPokemon> = ArrayList()
+
+        //makeApiCall(token!!)
+        //actual
         CoroutineScope(Dispatchers.IO).launch {
             data = db.capturedPkmDao().getAll()
             if(data.isNotEmpty()){
@@ -213,12 +216,21 @@ if (it != null) {
         val c = Captured()
         c.name = i.name
         c.id = i.id
+        c.pkImage="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+i.id.toString()+".png"
         captured.add(c)
         CoroutineScope(Dispatchers.IO).launch {
             db.capturedPkmDao().insert(i.id.toString(), i.name!!, "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+i.id.toString()+".png")
         }
     }
 }
+
+
+    CoroutineScope(Dispatchers.Main).launch {
+        adapter= CapturedRecyclerViewAdapter(captured)
+        val numberOfColumns = 3
+        rvCaptured.setLayoutManager(GridLayoutManager(activity, numberOfColumns))
+        rvCaptured.adapter = adapter
+    }
 
 
 })

@@ -20,7 +20,7 @@ abstract class AppDatabase : RoomDatabase() {
                 INSTANCE = Room.databaseBuilder(
                     context,
                     AppDatabase::class.java,
-                    "pocketm002.db")
+                        "pokedb_03.db")
                     .build()
             }
             return INSTANCE as AppDatabase

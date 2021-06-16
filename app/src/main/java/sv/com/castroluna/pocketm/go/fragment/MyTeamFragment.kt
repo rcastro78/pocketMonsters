@@ -70,7 +70,6 @@ class MyTeamFragment : Fragment() {
             if(data.isNotEmpty()){
                 readData()
             }else{
-
                 CoroutineScope(Dispatchers.Main).launch {
                     makeApiCall(token!!)
                 }
@@ -145,7 +144,6 @@ class MyTeamFragment : Fragment() {
                     response: Response<PokemonDataRoot>?
                 ) {
                     if (response != null) {
-                        val img = response.body().sprites?.front_default!!
                         for(t in response.body().types!!){
                             tps += t.name+", "
                         }
@@ -163,15 +161,17 @@ class MyTeamFragment : Fragment() {
                 }
             })
 
-            adapter=MyTeamRecyclerViewAdapter(myTeam)
-            val vLayoutManager =
-                LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-            rvTeam.layoutManager = vLayoutManager
-            rvTeam.adapter = adapter
+
 
         }
 
-
+        CoroutineScope(Dispatchers.Main).launch {
+            adapter=MyTeamRecyclerViewAdapter(myTeam)
+            val vLayoutManager =
+                    LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+            rvTeam.layoutManager = vLayoutManager
+            rvTeam.adapter = adapter
+        }
 
 
 
@@ -184,14 +184,25 @@ class MyTeamFragment : Fragment() {
             db.teamDao().delete()
         }
         val vm = viewModel
+        val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
+        val output = SimpleDateFormat("MM/dd/yyyy")
+
+
         vm.getMyTeamListDataObserver().observe(viewLifecycleOwner, {
             if (it != null) {
                 for (i in it) {
+
+                    val strDate = i.captured_at?.replace("Z","")
+                    val dt:Date = sdf.parse(strDate)
+                    val fDate:String = output.format(dt)
+
                     val t = MyTeam()
                     t.id = i.id
                     t.name = i.name
-                    t.captured_at = i.captured_at
-
+                    t.captured_at = fDate
+                    t.hp = i.hp
+                    t.type = i.type
+                    t.pokeUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+i.id.toString()+".png"
                     myTeam.add(t)
                     CoroutineScope(Dispatchers.IO).launch {
                         db.teamDao().insert(i.name!!, "250", "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+i.id.toString()+".png", "", i.captured_at!!)
@@ -204,6 +215,8 @@ class MyTeamFragment : Fragment() {
             }
 
             getPokeData(myTeam)
+
+
 
 
         })

@@ -22,7 +22,7 @@ class CapturedByOtherFragment : Fragment() {
     private val SHARED:String="spref.castroluna.pocketm.go"
     private var sharedPreferences: SharedPreferences? = null
     private lateinit var viewModel: CapturedByOtherViewModel
-
+    var movesList:ArrayList<String> = ArrayList()
     companion object {
         fun newInstance() = CapturedByOtherFragment()
     }
@@ -85,11 +85,25 @@ class CapturedByOtherFragment : Fragment() {
 
                 var moves:String=""
                 for(mv in it.moves!!){
-                    moves += mv.move?.name!!+", "
+                    movesList.add(mv.move?.name!!)
                 }
 
                 lblType.text="Types: "+types
-                lblMove.text = "Move: "+moves
+
+
+                if (movesList.size >= 4) {
+                    //Random
+                    movesList.shuffle()
+                    //lblType.text = ""
+                    lblMove.text = "Moves: " + movesList[0] + ", " + movesList[1] + ", " + movesList[2] + ", " + movesList[3]
+                } else {
+                    for (m in movesList) {
+                        moves += "$m, "
+                        lblMove.text = moves
+                    }
+                }
+
+
             }
         })
         vm.apiCallAbility(name)

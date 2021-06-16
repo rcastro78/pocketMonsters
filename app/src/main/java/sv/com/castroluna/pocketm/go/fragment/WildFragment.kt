@@ -193,7 +193,7 @@ class WildFragment: Fragment() {
             }
 
             override fun onFailure(call: Call<JsonObject>?, t: Throwable?) {
-                TODO("Not yet implemented")
+               Log.d("WILD_FRAG",t.toString());
             }
 
         })
@@ -220,7 +220,7 @@ class WildFragment: Fragment() {
                     //Random
                     movesList.shuffle()
                     //lblType.text = ""
-                    lblMove.text = "Moves: " + movesList[0] + " " + movesList[1] + " " + movesList[2] + " " + movesList[3]
+                    lblMove.text = "Moves: " + movesList[0] + ", " + movesList[1] + ", " + movesList[2] + ", " + movesList[3]
                 } else {
                     for (m in movesList) {
                         moves += "$m, "

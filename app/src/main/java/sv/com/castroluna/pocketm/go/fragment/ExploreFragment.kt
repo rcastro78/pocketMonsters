@@ -2,15 +2,18 @@ package sv.com.castroluna.pocketm.go.fragment
 
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.location.Location
 import android.os.Bundle
+import android.os.StrictMode
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -21,8 +24,11 @@ import com.google.android.gms.maps.model.MarkerOptions
 import sv.com.castroluna.pocketm.go.DetailActivity
 import sv.com.castroluna.pocketm.go.R
 import sv.com.castroluna.pocketm.go.model.PokemonPosition
-import sv.com.castroluna.pocketm.go.viewmodel.CapturedByOtherViewModel
 import sv.com.castroluna.pocketm.go.viewmodel.ExploreViewModel
+import java.io.IOException
+import java.io.InputStream
+import java.net.HttpURLConnection
+import java.net.URL
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -55,12 +61,12 @@ class ExploreFragment : Fragment() {
                     val longitude:Double = marker.position.longitude
 
                     val editor: SharedPreferences.Editor? = sharedPreferences?.edit()
-                    editor!!.putString ("CAPT_LATITUDE",latitude.toString())
-                    editor!!.putString ("CAPT_LONGITUDE",longitude.toString())
-                    editor!!.putString ("SPOTTED",marker.title)
-                    editor!!.putInt("TYPE_DETAIL",1)
+                    editor!!.putString("CAPT_LATITUDE", latitude.toString())
+                    editor!!.putString("CAPT_LONGITUDE", longitude.toString())
+                    editor!!.putString("SPOTTED", marker.title)
+                    editor!!.putInt("TYPE_DETAIL", 1)
                     editor.apply()
-                    val intent = Intent (activity, DetailActivity::class.java)
+                    val intent = Intent(activity, DetailActivity::class.java)
                     activity?.startActivity(intent)
 
 
@@ -142,13 +148,14 @@ class ExploreFragment : Fragment() {
                     val pos = getRandomLocation(seattle, 10_000)
                     pokeList.name = it.name
                     pokeList.url = it.url
-
+                    pokeList.id = it.id
                     pokeList.latitude = pos!!.latitude
                     pokeList.longitude = pos!!.longitude
                     pokemonLocations.add(pokeList)
 
 
                 }
+
 
                 for (pokemon: PokemonPosition in pokemonLocations) {
                     val location = LatLng(pokemon.latitude, pokemon.longitude)
@@ -158,6 +165,7 @@ class ExploreFragment : Fragment() {
                             .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeball01)
                             )
                     )
+
                 }
 
 
@@ -165,9 +173,8 @@ class ExploreFragment : Fragment() {
                 Toast.makeText(activity, "Error showing items in map", Toast.LENGTH_LONG).show()
             }
         })
-        vm.apiCall("50")
+        vm.apiCall("100")
     }
-
 
 
 
